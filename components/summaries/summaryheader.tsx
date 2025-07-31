@@ -60,7 +60,7 @@ export default function SummaryHeader({
           </span>
         </h1>
       </div>
-      <div className="self-start">
+      <div className="self-start flex flex-col gap-y-4">
         <Link href="/dashboard">
           <Button
             className="group flex items-center gap-1 sm:gap-2 hover:bg-white/80 backdrop-blur-xs rounded-full transition-all duration-200 shadow-xs hover:shadow-md border border-rose-100/30 bg-rose-100 px-2 sm:px-3"
@@ -69,13 +69,14 @@ export default function SummaryHeader({
           >
             <ChevronLeft
               className="h-3 w-3 sm:h-4 sm:w-4 
-            text-rose-500 transition-transform group-hover: translate-x-0.5"
+        text-rose-500 transition-transform group-hover:translate-x-0.5"
             />
             <span className="text-xs sm:text-sm text-muted-foreground font-medium">
               Back <span className="hidden sm:inline">to</span> Dashboard
             </span>
           </Button>
         </Link>
+
         <DownloadSummaryButton
           title={title}
           summary_text={summary_text}

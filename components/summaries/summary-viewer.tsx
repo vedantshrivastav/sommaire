@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { NavigationControls } from "./navigation-controls";
 import ProgressBar from "./progress-bar";
+import ContentSection from "./content-section";
 
 const SectionTitle = ({ title }: { title: string }) => {
   return (
@@ -81,11 +82,10 @@ export default function SummaryViewer({ summary }: { summary: string }) {
       >
         <div className="px-4 sm:px-6 ">
           <SectionTitle title={sections[currentsection].title} />
-          <ul>
-            {sections[currentsection]?.points.map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
-          </ul>
+          <ContentSection
+            title={sections[currentsection].title}
+            points={sections[currentsection].points}
+          />
         </div>
       </div>
       <NavigationControls
