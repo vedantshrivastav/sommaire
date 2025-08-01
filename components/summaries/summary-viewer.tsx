@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { NavigationControls } from "./navigation-controls";
 import ProgressBar from "./progress-bar";
 import ContentSection from "./content-section";
+import { MotionDiv } from "../common/motion-wrapper";
 
 const SectionTitle = ({ title }: { title: string }) => {
   return (
@@ -76,7 +77,12 @@ export default function SummaryViewer({ summary }: { summary: string }) {
     >
       <ProgressBar sections={sections} currentSection={currentsection} />
       {/* {JSON.stringify(sections[currentsection].points)} */}
-      <div
+      <MotionDiv
+        key={currentsection}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
+        exit={{ opacity: 0 }}
         className="h-full overflow-y-auto scrollbar-hide
         pt-12 sm:pt-16 pb-20 sm:pb-24"
       >
@@ -87,7 +93,7 @@ export default function SummaryViewer({ summary }: { summary: string }) {
             points={sections[currentsection].points}
           />
         </div>
-      </div>
+      </MotionDiv>
       <NavigationControls
         currentSection={currentsection}
         totalSections={sections.length}

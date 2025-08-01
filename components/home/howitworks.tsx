@@ -1,5 +1,6 @@
 import { BrainCircuit, FileOutput, FileText, MoveRight } from "lucide-react";
 import { ReactNode } from "react";
+import { MotionDiv, MotionH2, MotionH3 } from "../common/motion-wrapper";
 
 type Steps = {
   icon: ReactNode;
@@ -43,17 +44,33 @@ export default function Howitworks() {
           />
         </div>
         <div className="text-center  mb-16">
-          <h2 className="font-bold text-xl uppercase mb-4 text-rose-500">
+          <MotionH2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="font-bold text-xl uppercase mb-4 text-rose-500"
+          >
             How It Works
-          </h2>
-          <h3 className="font-bold text-2xl max-w-2xl mx-auto">
+          </MotionH2>
+          <MotionH3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="font-bold text-2xl max-w-2xl mx-auto"
+          >
             Transform any PDF into an easy-to-digest summary in three simple
             steps
-          </h3>
+          </MotionH3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
           {steps.map((step, idx) => (
-            <div className="relative flex items-stretch" key={idx}>
+            <MotionDiv
+              initial={{ opacity: 0, y: 0.5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.2 }}
+              className="relative flex items-stretch"
+              key={idx}
+            >
               <StepItem
                 key={idx}
                 icon={step.icon}
@@ -61,15 +78,20 @@ export default function Howitworks() {
                 description={step.description}
               />
               {idx < steps.length - 1 && (
-                <div className="hidden absolute md:block top-1/2 -right-4 transform -translate-y-1/2">
+                <MotionDiv
+                  initial={{ opacity: 0, y: 0.5 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.2 }}
+                  className="hidden absolute md:block top-1/2 -right-4 transform -translate-y-1/2"
+                >
                   <MoveRight
                     className="text-rose-400"
                     size={32}
                     strokeWidth={1}
                   ></MoveRight>
-                </div>
+                </MotionDiv>
               )}
-            </div>
+            </MotionDiv>
           ))}
         </div>
       </div>

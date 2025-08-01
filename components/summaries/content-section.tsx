@@ -1,3 +1,6 @@
+import { containerVariants, itemVariants } from "@/utils/constants";
+import { MotionDiv } from "../common/motion-wrapper";
+
 function parsePoint(point: string) {
   const isNumbered = /^\d+\./.test(point);
   const isMainPoint = /^\s*[-–—*]\s+/.test(point);
@@ -26,7 +29,8 @@ function parseEmojiPoint(content: string) {
 
 const RegularPoint = ({ point, index }: { point: string; index: number }) => {
   return (
-    <div
+    <MotionDiv
+      variants={itemVariants}
       key={`point-${index}`}
       className="group relative bg-linear-to-br 
   from-gray-200/10 to-gray-400/10.03 p-4 
@@ -46,7 +50,7 @@ const RegularPoint = ({ point, index }: { point: string; index: number }) => {
       >
         {point}
       </p>
-    </div>
+    </MotionDiv>
   );
 };
 
@@ -58,7 +62,13 @@ export default function ContentSection({
   points: string[];
 }) {
   return (
-    <div>
+    <MotionDiv
+      variants={containerVariants}
+      key={points.join("")}
+      initial="hidden"
+      whileInView="visible"
+      exit="exit"
+    >
       {points.map((point, index) => {
         const { isEmpty, isMainPoint, hasEmoji, isNumbered } =
           parsePoint(point);
@@ -81,7 +91,8 @@ export default function ContentSection({
 
         if (hasEmoji || isMainPoint) {
           return (
-            <div
+            <MotionDiv
+              variants={itemVariants}
               className="group relative bg-linear-to-r from-gray-200/[0.08] to-gray-400/[0.03]
          p-4 rounded-2xl border border-gray-500/10 hover:shadow-lg
          transition-all"
@@ -96,7 +107,7 @@ export default function ContentSection({
                   {text}
                 </p>
               </div>
-            </div>
+            </MotionDiv>
           );
         }
 
@@ -104,6 +115,6 @@ export default function ContentSection({
           <RegularPoint key={`point-${index}`} point={point} index={index} />
         );
       })}
-    </div>
+    </MotionDiv>
   );
 }
