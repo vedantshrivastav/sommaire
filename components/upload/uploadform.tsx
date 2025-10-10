@@ -39,8 +39,8 @@ export default function Uploadform() {
         description: err.message,
       });
     },
-    onUploadBegin: ({ file }) => {
-      console.log("upload has begun for", file);
+    onUploadBegin: (fileName: string) => {
+      console.log("upload has begun for", fileName);
     },
   });
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
