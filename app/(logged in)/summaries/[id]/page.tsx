@@ -7,7 +7,7 @@ import { FileText } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export default async function SummaryPage(props: { params: { id: string } }) {
-  const { id } = props.params;
+  const { id } = await props.params;
   const summary = await getSummaryById(id);
   const {
     title,
