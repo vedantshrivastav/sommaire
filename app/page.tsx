@@ -3,9 +3,10 @@ import CTAsection from "@/components/home/ctasection";
 import Demosection from "@/components/home/demosection";
 import Herosectoion from "@/components/home/herosection";
 import Howitworks from "@/components/home/howitworks";
-import Pricingsection from "@/components/home/pricingsection";
+import Pricingsection from "@/components/home/featuressection";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import FeaturesSection from "@/components/home/featuressection";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
         <Herosectoion />
         <Demosection />
         <Howitworks />
-        <Pricingsection />
+        <FeaturesSection />
         <CTAsection />
       </div>
     </div>
