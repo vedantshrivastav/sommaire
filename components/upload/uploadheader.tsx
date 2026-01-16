@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "motion/react";
 import { Badge } from "../ui/badge";
 import { Sparkles } from "lucide-react";
 
@@ -9,15 +11,16 @@ export default function Uploadheader() {
           rounded-full bg-linear-to-r from-rose-200 via bg-rose-500
           to-rose-800 animate-gradient-x group"
       >
-        <Badge
-          variant="secondary"
-          className="relative
-          px-6 py-2 text-base font-medium bg-white rounded-full group-hover:
-          bg-gray-50 transition-colors"
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 bg-rose-50 border border-rose-100 rounded-full shadow-sm"
         >
-          <Sparkles className="h-6 w-6 mr-2 text-rose-600 animate-pulse" />
-          <p className="text-base">AI Powered Content Creation</p>
-        </Badge>
+          <Sparkles className="w-3.5 h-3.5 text-rose-500" />
+          <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-rose-600">
+            AI Powered Content Creation
+          </span>
+        </motion.div>
       </div>
       <div
         className="capitalize text-3xl font-bold tracking-tight

@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning={true}>
         <body className={`${fontSans.variable} font-sans antialiased`}>
           <div className="relative flex min-h-screen flex-col">
             <Header />
