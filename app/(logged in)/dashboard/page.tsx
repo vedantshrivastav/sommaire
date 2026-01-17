@@ -9,6 +9,8 @@ import { ArrowRight, Plus } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import EmptySummaryState from "@/components/summaries/emptysummarystate";
+import motion from "motion/react";
+import { MotionButton } from "@/components/common/motion-wrapper";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -35,18 +37,23 @@ export default async function DashboardPage() {
                 Transform your pdf into concise,actionable insights
               </p>
             </div>
-            <Button
-              variant="link"
-              className="bg-to-linear-to-r from-rose-500 to-rose-700 hover:from-rose-600 hover:to-rose-700
-            hover:scale-105 transition-all duration-300 group hover:no-underline"
+            <MotionButton
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative flex items-center gap-2 px-6 py-2 h-14 bg-gradient-to-r from-[#1A1A24] via-[#2A1F30] to-[#F43F5E] text-white rounded-full font-bold shadow-xl shadow-rose-500/10 transition-all duration-300 overflow-hidden"
             >
-              <Link href="/upload" className="flex items-center text-white">
-                <Plus className="w-5 h-5 mr-2" />
+              <Link
+                href="/upload"
+                className="flex items-center text-white leading-none"
+              >
+                <Plus className="w-5 h-3 mr-2" />
                 New Summary
               </Link>
-            </Button>
+            </MotionButton>
           </div>
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <div
               className="bg-rose-50 border border-rose-200
             rounded-lg p-4 text-rose-800"
@@ -65,7 +72,7 @@ export default async function DashboardPage() {
               </Link>
               for unlimited uploads
             </div>
-          </div>
+          </div> */}
         </div>
         {summaries.length === 0 ? (
           <EmptySummaryState />

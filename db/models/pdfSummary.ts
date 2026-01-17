@@ -22,5 +22,8 @@ const PdfSummarySchema: Schema<IPdfSummary> = new Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-const PdfSummary = mongoose.model<IPdfSummary>('PdfSummary', PdfSummarySchema);
+const PdfSummary =
+  mongoose.models.PdfSummary ||
+  mongoose.model<IPdfSummary>('PdfSummary', PdfSummarySchema);
+
 export default PdfSummary;

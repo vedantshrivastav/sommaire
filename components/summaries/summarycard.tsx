@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Card } from "../ui/card";
 import DeleteButton from "./deletebutton";
-import { FileText } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, FileText } from "lucide-react";
 import { cn, formatFileName } from "@/lib/utils";
 import { formatDistance, subDays } from "date-fns";
+import { MotionDiv } from "../common/motion-wrapper";
 
 const SummaryHeader = ({
   fileURL,
@@ -52,31 +53,65 @@ const StatusBadge = ({ status }: { status: string }) => {
   );
 };
 
-export default function Summarycard({ summary }: { summary: any }) {
+export default function SummaryCard({ summary }: { summary: any }) {
   return (
-    <div>
-      <Card className="relative h-full">
-        <div className="absolute top-2 right-2">
-          <DeleteButton summary_id={summary._id.toString()} />
-        </div>
-        <Link className="block p-4 sm:p-6" href={`summaries/${summary._id}`}>
-          <div className="flex flex-col gap-3 sm:gap-4">
-            <SummaryHeader
-              fileURL={summary.original_file_url}
-              title={summary.title}
-              created_at={summary.created_at}
-            />
-            <p className="text-gray-600 line-clamp-2 text-sm sm:text-base pl-2">
-              {summary.summary_text}
-            </p>
-            <div className="flex justify-between items-center mt-2 sm:mt-4">
-              <span>
-                <StatusBadge status={summary.status} />
-              </span>
+    <MotionDiv
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      whileHover={{
+        y: -5,
+        boxShadow:
+          "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+      }}
+      className="group relative bg-white border border-slate-100 rounded-[2rem] p-6 transition-all duration-300 hover:border-rose-200 shadow-sm"
+    >
+      {/* Delete */}
+      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <DeleteButton summary_id={summary._id.toString()} />
+      </div>
+
+      <Link href={`/summaries/${summary._id}`} className="block">
+        {/* Header */}
+        <div className="flex items-start gap-4 mb-6">
+          <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-rose-500 group-hover:text-white">
+            <FileText className="w-6 h-6" />
+          </div>
+
+          <div className="flex flex-col">
+            <h4 className="font-bold text-slate-900 line-clamp-1 group-hover:text-rose-600 transition-colors">
+              {summary.title}
+            </h4>
+            <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+              <Clock className="w-3 h-3" />
+              {new Date(summary.created_at).toLocaleDateString()}
             </div>
           </div>
-        </Link>
-      </Card>
-    </div>
+        </div>
+
+        {/* Excerpt */}
+        <div className="mb-6 h-20">
+          <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 font-medium">
+            {summary.summary_text}
+          </p>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
+            <CheckCircle2 className="w-3 h-3" />
+            {summary.status}
+          </div>
+
+          <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 transition-colors flex items-center gap-1">
+            View Summary <ArrowRight className="w-3 h-3" />
+          </span>
+        </div>
+      </Link>
+
+      {/* Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-rose-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem] pointer-events-none" />
+    </MotionDiv>
   );
 }
