@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import connectDB from '../db/config';
 import PdfSummaryModel from '../db/models/pdfSummary'; // ✅ default import
-
+import { IPdfSummary } from '../db/models/pdfSummary';
 export async function getSummaries(userId: string) {
   await connectDB(); // this connects to MongoDB via Mongoose
   const summaries = await PdfSummaryModel.find({ user_id: userId })
@@ -21,7 +21,7 @@ export default async function getSummaryById(id: string) {
       return null;
     }
 
-    const summary = await PdfSummaryModel.findById(id).lean();
+    const summary  = await PdfSummaryModel.findById(id).lean<IPdfSummary>();
     const word_count = summary?.summary_text?.trim().split(/\s+/).length;
     return{
       ...summary,
