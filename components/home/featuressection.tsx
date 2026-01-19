@@ -19,6 +19,10 @@ const SpotlightCard = ({
   children,
   className = "",
   spotlightColor = "rgba(244, 63, 94, 0.15)",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  spotlightColor?: string;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
